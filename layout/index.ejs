@@ -61,19 +61,6 @@
   <% } %>
 </section>
 
-<% if (site.data.projects) { %>
-<section id="projects">
-  <span class="h1"><a href="<%- url_for(theme.projects_url) %>"><%= __('index.projects') %></a></span>
-  <ul class="project-list">
-    <% for(var obj in site.data.projects){ %>
-      <li class="project-item">
-        <a href="<%= site.data.projects[obj].url %>"><%= site.data.projects[obj].name %></a>: <%- markdown(site.data.projects[obj].desc) %>
-      </li>
-    <% } %>
-  </ul>
-</section>
-<% } %>
-
 <!-- 摄影作品轮播 -->
 <section id="photography">
   <span class="h1"><%= __('index.photography') %></span>
@@ -91,11 +78,23 @@
         </div>
       <% }); %>
     </div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
     <div class="swiper-pagination"></div>
   </div>
 </section>
+
+<% if (site.data.projects) { %>
+<section id="projects">
+  <span class="h1"><a href="<%- url_for(theme.projects_url) %>"><%= __('index.projects') %></a></span>
+  <ul class="project-list">
+    <% for(var obj in site.data.projects){ %>
+      <li class="project-item">
+        <a href="<%= site.data.projects[obj].url %>"><%= site.data.projects[obj].name %></a>: <%- markdown(site.data.projects[obj].desc) %>
+      </li>
+    <% } %>
+  </ul>
+</section>
+<% } %>
+
 
 <!-- 更新后的Swiper CDN链接 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
