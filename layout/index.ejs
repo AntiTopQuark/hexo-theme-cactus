@@ -19,10 +19,10 @@
           </a>
         <% } else { %>
           <a class="icon u-url" target="_blank" rel="noopener me" href="<%- url_for(link) %>" aria-label="<%- title %>" title="<%- title %>">
-            <i class="fa-brands fa-<%= icon %>"></i><!--
-      ---></a><!--
-    ---><% } %><!--
-    ---><%= ( nb_links > 0 && i < nb_links-1 ?
+            <i class="fa-brands fa-<%= icon %>"></i>
+          </a>
+        <% } %>
+      <%= ( nb_links > 0 && i < nb_links-1 ?
             ( i == nb_links-2 ? ' '+__('index.enum_and')+' '
             : __('index.enum_comma')+' ' )
             : '.' ) %>
@@ -52,6 +52,7 @@
       <li class="post-item">
         <%- partial('_partial/post/date', { post: post, class_name: 'meta' }) %>
         <span><%- partial('_partial/post/title', { post: post, index: true, class_name: '' }) %></span>
+        <span class="post-tags"> <%- partial('_partial/post/tag', { page: post, class_name: 'tags' }) %></span>
       </li>
     <% }); %>
   </ul>
@@ -72,3 +73,45 @@
   </ul>
 </section>
 <% } %>
+
+<!-- 摄影作品轮播 -->
+<section id="photography">
+  <span class="h1"><%= __('index.photography') %></span>
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <% site.data.photos.forEach(function(photo){ %>
+        <div class="swiper-slide">
+          <img src="<%= photo.url %>" alt="<%= photo.title %>">
+          <% if (photo.title || photo.description) { %>
+            <div class="swiper-caption">
+              <% if (photo.title) { %><h3><%= photo.title %></h3><% } %>
+              <% if (photo.description) { %><p><%= photo.description %></p><% } %>
+            </div>
+          <% } %>
+        </div>
+      <% }); %>
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
+
+<!-- 更新后的Swiper CDN链接 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    new Swiper('.swiper-container', {
+      loop: true,
+      slidesPerView: 1, // 关键参数
+      autoplay: { delay: 5000 },
+      pagination: { el: '.swiper-pagination', clickable: true },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  });
+</script>
