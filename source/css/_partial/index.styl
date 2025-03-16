@@ -64,8 +64,12 @@
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  color: white;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  color: black; /* 改为黑色字体 */
+  text-shadow: 
+    -1px -1px 0 white,  /* 左上白色描边 */
+    1px -1px 0 white,   /* 右上白色描边 */
+    -1px 1px 0 white,    /* 左下白色描边 */
+    1px 1px 0 white;     /* 右下白色描边 */
 }
 
 .post-item .post-tags {
